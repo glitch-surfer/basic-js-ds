@@ -30,23 +30,23 @@ function removeKFromList(l, k) {
   let prev
   let current = l
 
-  function sort(list) {
-    
+  function deleteNode(list) {
+    if (!list.next) {
+      return null
+    }
+
+    if (list.next.value === k) {
+      list.next = deleteNode(list.next)
+    }
+    list = list.next
+    return list
   }
 
-  while(current.next) {
-    /* if (current.next.value === k) {
-      prev.next = current.next.next ? current.next.next : null
-    } */
-/*     if (current.value === k && current.next) {
-      prev.next = current.next
-    } */
+  while (current.next) {
     prev = current
     current = current.next
-// this ok for 2 test, without for 3
-    if(current.value === k) {
-      prev.next = current.next.value !== k ? current.next : current.next.next ? current.next.next : null 
-      
+    if (current.value === k) {
+      prev.next = deleteNode(current)
     }
   }
   return l
